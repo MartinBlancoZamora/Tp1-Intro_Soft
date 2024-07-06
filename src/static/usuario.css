@@ -1,0 +1,77 @@
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    max-width: 74%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.nav-link:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+.user-section {
+    border-top: 1px solid #495057;
+    text-align: center;
+}
+
+.user-section .nav-link {
+    margin-top: 10px;
+}
+
+.main-content {
+    background-color: rgb(214, 204, 189);
+    height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    color: #333;
+}
+
+.input-group-text {
+    background-color: #e9ecef;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+}
+
+
+.footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .social-icons a {
+    color: #fff;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #d6ccbd;
+}
