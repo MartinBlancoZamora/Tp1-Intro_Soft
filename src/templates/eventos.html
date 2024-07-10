@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Pomodoro Team</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='eventos.css') }}">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="{{ url_for('registro') }}">
+                            <i class="bi bi-pencil-square me-2"></i>Registrarme
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('usuario') }}">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar bg-dark text-light">
+            <div class="logo p-3 text-center">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="img-fluid">
+            </div>
+            <nav class="nav flex-column p-3">
+                <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
+                    <i class="bi bi-house-door-fill me-2"></i> Home
+                </a>
+                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center">
+                    <i class="bi bi-book-fill me-2"></i> Materias
+                </a>
+                <a href="eventos.html" class="nav-link text-light d-flex align-items-center">
+                    <i class="bi bi-calendar-event-fill me-2"></i> Eventos
+                </a>
+                <a href="tareas.html" class="nav-link text-light d-flex align-items-center">
+                    <i class="bi bi-card-checklist me-2"></i> Tareas
+                </a>
+            </nav>
+        </div>
+        
+        <div class="main-content flex-grow-1">
+            <div class="half-background">
+                <div class="styled-box">
+                    <h1>Eventos</h1>
+                    
+                    <p>En esta seccion podemos ver los eventos proximos</p>
+                
+                    </div>
+                
+                    <table>
+                        
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Fecha límite</th>
+                                <th>Descripción</th>
+                                <th>Materia</th>
+                            </tr>
+                       </thead>
+                        
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Final</td>
+                                <td>15/07</td>
+                                <td>Exposicion del TP final</td>
+                                <td>Introduccion al Software</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Segundo parcial</td>
+                                <td>30/07</td>
+                                <td>Examen presencial de la materia</td>
+                                <td>Algoritmos</td>
+                            </tr>
+                        <!-- Agrega más filas aquí -->
+                            <tr>
+                                <td>3</td>
+                                <td>Segundo parcial</td>
+                                <td>17/07</td>
+                                <td>Examen presencial de la materia</td>
+                                <td>Analisis II</td>
+                                </tr>
+                        
+                         </tbody>
+             
+            
+                    </table> 
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light text-center py-3 mt-auto">
+        <div class="container">
+            <p>&copy; 2024 Pomodoro Team. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#" class="text-light mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
