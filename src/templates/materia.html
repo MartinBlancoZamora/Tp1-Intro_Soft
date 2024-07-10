@@ -36,7 +36,7 @@
         
         <!-- Main content -->
         <div class="main-content flex-grow-1 d-flex flex-column align-items-center">
-            <div class="half-background">
+            <div class="half-background" style="max-width: 5000px;">
                 <div class="container">
                     <div class="header d-flex justify-content-between align-items-center">
                         <h1>{{ materia['nombre'] }}</h1>
@@ -50,10 +50,81 @@
                             <p>{{ materia['calificaciones'] }}</p>
                         </div>
                         <div class="actions">
-                            <button class="btn btn-success btn-edit"><i class="bi bi-pencil"></i> Editar Materia</button>
-                            <button class="btn btn-danger btn-delete"><i class="bi bi-trash"></i> Eliminar Materia</button>
+                            <a href="{{ url_for('editar_materia', nombre=materia['nombre']) }}" class="btn btn-success btn-edit"><i class="bi bi-pencil"></i>Editar Materia</a>
+                            <form action="{{ url_for('eliminar_materia', nombre=materia['nombre']) }}" method="post" class="mt-3">
+                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar Materia</button>
+                            </form>
                         </div>
                     </div>
+                    <div class="tareas-section container mt-3" style="max-width: 4500px;">
+                        <h2>Tareas</h2>
+                        <form id="tareaForm" class="row g-3 mb-4" method="post">
+                            <div class="col-md-3">
+                                <label for="tarea" class="form-label">Nombre Tarea</label>
+                                <input type="text" class="form-control" id="tarea" name="tarea" placeholder="Nombra tu tarea aquí..." required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción de la tarea">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fecha_limite" class="form-label">Fecha Límite</label>
+                                <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" required>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-600"><i class="bi bi-plus-circle"></i> Añadir Tarea</button>
+                            </div>
+                        </form>
+                        <ul class="list-group tareas-list w-100" id="tareasList">
+                            {% for tarea in materia['tareas'] %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ tarea['nombre'] }}</strong>
+                                    <p>{{ tarea['descripcion'] }}</p>
+                                    <small>Fecha Límite: {{ tarea['fecha_limite'] }}</small>
+                                </div>
+                                <form method="post" action="{{ url_for('eliminar_tarea', nombre=materia['nombre'], tarea_id=loop.index0) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="eventos-section container mt-3" style="max-width: 4500px;">
+                        <h2>Eventos</h2>
+                        <form id="eventoForm" class="row g-3 mb-4" method="post">
+                            <div class="col-md-3">
+                                <label for="evento" class="form-label">Nombre Evento</label>
+                                <input type="text" class="form-control" id="evento" name="evento" placeholder="Nombra tu evento aquí..." required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="descripcion_evento" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion_evento" name="descripcion_evento" placeholder="Descripción del evento">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fecha_evento" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-600"><i class="bi bi-plus-circle"></i> Añadir Evento</button>
+                            </div>
+                        </form>
+                        <ul class="list-group eventos-list w-100" id="eventosList">
+                            {% for evento in materia['eventos'] %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ evento['nombre'] }}</strong>
+                                    <p>{{ evento['descripcion'] }}</p>
+                                    <small>Fecha: {{ evento['fecha'] }}</small>
+                                </div>
+                                <form method="post" action="{{ url_for('eliminar_evento', nombre=materia['nombre'], evento_id=loop.index0) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -74,6 +145,22 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteTaskButtons = document.querySelectorAll('.btn-danger');
+            
+            deleteTaskButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const form = button.closest('form');
+                    if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 

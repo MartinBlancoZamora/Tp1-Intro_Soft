@@ -1,51 +1,38 @@
-
 body {
     background-color: rgb(214, 204, 189);
     margin: 0;
     font-family: Arial, sans-serif;
 }
 
+.d-flex {
+    display: flex;
+}
 
 .sidebar {
     width: 250px;
-    height: 100vh;
+    height: 100vh; 
     display: flex;
     flex-direction: column;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    top: 0;
+    bottom: 0;
 }
-
-.logo img {
-    max-width: 74%;
-    height: auto;
-    border-radius: 10px;
-}
-
-.nav-link:hover {
-    background-color: #495057;
-    border-radius: 5px;
-}
-
-.user-section {
-    border-top: 1px solid #495057;
-    text-align: center;
-}
-
-.user-section .nav-link {
-    margin-top: 10px;
-}
-
 
 .main-content {
+    margin-left: 250px; 
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     background-color: rgb(214, 204, 189);
+    min-height: 100vh; 
 }
 
 .half-background {
     width: 100%;
+    max-width: 1200px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,12 +43,13 @@ body {
 }
 
 .container {
+    width: 100%;
+    max-width: 1100px; 
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px auto;
-    max-width: 800px;
 }
 
 .header {
@@ -136,7 +124,6 @@ body {
     color: #fff;
 }
 
-
 .footer {
     background-color: #2c3e50;
     color: #fff;
@@ -156,3 +143,71 @@ body {
 .footer .social-icons a:hover {
     color: #d6ccbd;
 }
+
+#tareaForm .btn-primary {
+    white-space: nowrap; 
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+}
+
+.tareas-list .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.tareas-list .list-group-item div {
+    flex-grow: 1;
+}
+
+.tareas-list .list-group-item button {
+    margin-left: 1rem;
+}
+
+
+.tareas-section {
+    width: 100%;
+    max-width: 1100px; 
+}
+
+#tareaForm {
+    width: 100%;
+    max-width: 1100px; 
+}
+
+
+.eventos-section {
+    width: 100%;
+    max-width: 1100px; 
+    margin-top: 20px;
+}
+
+#eventoForm .btn-primary {
+    white-space: nowrap;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.eventos-list .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.eventos-list .list-group-item div {
+    flex-grow: 1;
+}
+
+.eventos-list .list-group-item button {
+    margin-left: 1rem;
+}
+
+
