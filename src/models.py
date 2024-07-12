@@ -33,4 +33,3 @@ class Tareas(database.Model):
     fecha_limite = database.Column(database.DateTime, nullable = True)
     descripcion_tarea = database.Column(database.String(255), nullable = True)
     id_relacion = database.Column(database.interger, database.ForeignKey['id_materia'], nullable = True)
-    
