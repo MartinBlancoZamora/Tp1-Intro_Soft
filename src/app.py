@@ -75,7 +75,7 @@ def register():
             return redirect(url_for('registro'))
 
         # Crear una nueva instancia de Usuario
-        new_user = Usuarios(nombre_usuario=username, mail=email, contraseña=generate_password_hash(password))
+        new_user = Usuarios(nombre_usuario=username, mail=email, contraseña=password)
 
         # Agregar el nuevo usuario a la base de datos
         database.session.add(new_user)
@@ -186,7 +186,7 @@ def agregar_evento(materia_id):
     database.session.commit()
     
     flash('Evento agregado correctamente', 'success')
-    return redirect(url_for('gestion_materia', materia_id=materia_id))
+    return redirect(url_for('gestion_materias'))
 
 # Ruta para editar una materia
 @app.route('/editar_materia/<int:materia_id>', methods=['GET' , 'POST'])
