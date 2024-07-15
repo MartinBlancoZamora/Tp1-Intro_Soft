@@ -10,12 +10,6 @@ class Usuarios(database.Model):
     contraseña = database.Column(database.String(200), nullable=False)
     mail = database.Column(database.String(120), unique=True, nullable=False)
     materias = database.relationship('Materias', backref='usuario', lazy=True)
-    
-    def set_password(self, password):
-        self.contraseña = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.contraseña, password)
 
 
 class Materias(database.Model):
