@@ -66,7 +66,7 @@
                             <p>{{ materia.calificaciones }}</p>
                         </div>TypeError: unhashable type: 'list'
                         <div class="actions">
-                            <a href="{{ url_for('editar_materia', materia_id=materia.id) }}" class="btn btn-success btn-edit"><i class="bi bi-pencil"></i>Editar Materia</a>
+                            <a href="{{ url_for('editar_materia', materia_id=materia.id) }}" class="btn btn-success btn-edit" action="{{ url_for('editar_materia', materia_id=materia.id)}}"><i class="bi bi-pencil"></i>Editar Materia</a>
                             <form action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" method="post" class="mt-3">
                                 <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar Materia</button>
                             </form>

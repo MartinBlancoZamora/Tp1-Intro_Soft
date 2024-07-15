@@ -204,10 +204,11 @@ def editar_materia(materia_id):
         
         materia.nombre = request.form['nombre_materia']
         materia.horario = request.form['horario']
+        materia.calificaciones = request.form['calificaciones']
         database.session.commit()
         
         flash('Materia editada correctamente', 'success')
-        return redirect(url_for('materia_detalle', materia_id=materia_id))
+        return redirect(url_for('gestion_materias', materia_id=materia_id))
     
     return render_template('editar_materia.html')
 
