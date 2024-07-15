@@ -22,7 +22,7 @@
                 <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-house-door-fill me-2"></i> Home
                 </a>
-                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-book-fill me-2"></i> Materias
                 </a>
                 <a href="eventos.html" class="nav-link text-light d-flex align-items-center">
@@ -40,20 +40,20 @@
                 <div class="container">
                     <div class="header d-flex justify-content-between align-items-center">
                         <h1>Editar Materia</h1>
-                        <a href="{{ url_for('materia_detail', nombre=materia['nombre']) }}" class="btn btn-warning back-button"><i class="bi bi-arrow-left-circle"></i> Volver a Materia</a>
+                        <a href="{{ url_for('materia_detalle', materia_id=materia.id) }}" class="btn btn-warning back-button"><i class="bi bi-arrow-left-circle"></i> Volver a Materia</a>
                     </div>
                     <form method="post" class="row g-3">
                         <div class="col-md-12">
                             <label for="nombre" class="form-label">Nombre de la Materia</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ materia['nombre'] }}" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ materia.nombre }}" required>
                         </div>
                         <div class="col-md-12">
                             <label for="horario" class="form-label">Horario</label>
-                            <input type="text" class="form-control" id="horario" name="horario" value="{{ materia['horario'] }}" required>
+                            <input type="text" class="form-control" id="horario" name="horario" value="{{ materia.horario }}" required>
                         </div>
                         <div class="col-md-12">
                             <label for="calificaciones" class="form-label">Calificaciones</label>
-                            <input type="text" class="form-control" id="calificaciones" name="calificaciones" value="{{ materia['calificaciones'] }}" required>
+                            <input type="text" class="form-control" id="calificaciones" name="calificaciones" value="{{ materia.calificaciones }}" required>
                         </div>
                         <div class="col-12 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary w-auto">Guardar Cambios</button>

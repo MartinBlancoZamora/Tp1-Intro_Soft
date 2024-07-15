@@ -40,7 +40,7 @@
                 <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-house-door-fill me-2"></i> Home
                 </a>
-                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center active">
+                <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center active">
                     <i class="bi bi-book-fill me-2"></i> Materias
                 </a>
                 <a href="{{ url_for('eventos') }}" class="nav-link text-light d-flex align-items-center">
@@ -56,18 +56,18 @@
         <div class="main-content flex-grow-1">
             <div class="half-background">
                 <h1>Gestión de Materias</h1>
-                <form class="d-flex align-items-end mb-4" id="materiaForm" method="post" action="{{ url_for('gestionmaterias') }}">
+                <form class="d-flex align-items-end mb-4" id="materiaForm" method="POST" action="{{ url_for('gestion_materias') }}">
                     <div class="form-group me-3">
-                        <label for="nombreMateria" class="form-label">Nombre de la Materia</label>
-                        <input type="text" class="form-control" id="nombreMateria" name="nombreMateria" placeholder="Ej. Matemáticas" required>
+                        <label for="nombre_materia" class="form-label">Nombre de la Materia</label>
+                        <input type="text" class="form-control" id="nombreMateria" name="nombre_materia" placeholder="Ej. Matemáticas" required>
                     </div>
                     <div class="form-group me-3">
-                        <label for="horarioMateria" class="form-label">Horario</label>
-                        <input type="text" class="form-control" id="horarioMateria" name="horarioMateria" placeholder="Ej. Lun - Mie 18:00 - 19:00hs" required>
+                        <label for="horario_materia" class="form-label">Horario</label>
+                        <input type="text" class="form-control" id="horarioMateria" name="horario_materia" placeholder="Ej. Lun - Mie 18:00 - 19:00hs" required>
                     </div>
                     <div class="form-group me-3">
-                        <label for="calificacionesMateria" class="form-label">Calificaciones</label>
-                        <input type="text" class="form-control" id="calificacionesMateria" name="calificacionesMateria" placeholder="Ej. Parcial: 6, Final: 8" required>
+                        <label for="calificaciones_materia" class="form-label">Calificaciones</label>
+                        <input type="text" class="form-control" id="calificacionesMateria" name="calificaciones_materia" placeholder="Ej. Parcial: 6, Final: 8" required>
                     </div>
                     <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Añadir Materia</button>
                 </form>
@@ -75,14 +75,14 @@
                     {% for materia in materias %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <div>
-                            <h5 class="mb-1">{{ materia['nombre'] }}</h5>
-                            <p class="mb-1"><strong>Horario:</strong> {{ materia['horario'] }}</p>
-                            <p class="mb-1">Calificaciones: {{ materia['calificaciones'] }}</p>
+                            <h5 class="mb-1">{{ materia.nombre }}</h5>
+                            <p class="mb-1"><strong>Horario:</strong> {{ materia.horario }}</p>
+                            <p class="mb-1">Calificaciones: {{ materia.calificaciones }}</p>
                         </div>
                         <div>
-                            <a href="{{ url_for('materia_detail', nombre=materia['nombre']) }}" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-in-right"></i> Ir a Materia</a>
-                            <form action="{{ url_for('eliminar_materia', nombre=materia['nombre']) }}" method="post" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm eliminar-materia"><i class="bi bi-trash"></i> Eliminar</button>
+                            <a href="{{ url_for('detalle_materia', materia_id=materia.id) }}" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-in-right"></i> Ir a Materia</a>
+                            <form action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" method="POST" action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm eliminar-materia"><i class="bi bi-trash"></i>Eliminar</button>
                             </form>
                         </div>
                     </li>

@@ -22,7 +22,7 @@
                 <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-house-door-fill me-2"></i> Home
                 </a>
-                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-book-fill me-2"></i> Materias
                 </a>
                 <a href="{{ url_for('eventos') }}" class="nav-link text-light d-flex align-items-center">
@@ -39,24 +39,24 @@
                 <h2 class="text-center mb-4">Tu Perfil</h2>
                 <form>
                     <div class="mb-3">
-                        <label for="inputNombre" class="form-label">Nombre</label>
+                        <label for="input_nombre" class="form-label">Nombre</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" id="inputNombre" name="nombre" value="{{ usuario['nombre'] }}" readonly>
+                            <input type="text" class="form-control" id="inputNombre" name="nombre" value="{{ usuario.nombre_usuario }}" readonly>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Email</label>
+                        <label for="input_mail" class="form-label">Email</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                            <input type="email" class="form-control" id="inputEmail" name="email" value="{{ usuario['email'] }}" readonly>
+                            <input type="email" class="form-control" id="inputEmail" name="email" value="{{ usuario.mail }}" readonly>
                         </div>
                     </div>
                     <div class="mb-4">
-                        <label for="inputPassword" class="form-label">Contraseña</label>
+                        <label for="input_pass" class="form-label">Contraseña</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" id="inputPassword" name="password" value="{{ usuario['password'] }}" readonly>
+                            <input type="password" class="form-control" id="inputPassword" name="password" value="{{ usuario.contraseña }}" readonly>
                             <span class="input-group-text">
                                 <i class="bi bi-eye" id="togglePassword" style="cursor: pointer;"></i>
                             </span>

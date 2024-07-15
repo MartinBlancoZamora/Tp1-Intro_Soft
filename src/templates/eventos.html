@@ -8,11 +8,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="/static/eventos.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/mistareas.css">
 </head>
 <body>
-    
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
             </div>
         </div>
     </nav>
-
+    
     <div class="d-flex">
         <!-- Sidebar -->
         <div class="sidebar bg-dark text-light">
@@ -40,66 +40,50 @@
                 <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-house-door-fill me-2"></i> Home
                 </a>
-                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center active">
                     <i class="bi bi-book-fill me-2"></i> Materias
                 </a>
-                <a href="eventos.html" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('eventos') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-calendar-event-fill me-2"></i> Eventos
                 </a>
-                <a href="tareas.html" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('tareas') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-card-checklist me-2"></i> Tareas
                 </a>
             </nav>
         </div>
-        
+
+        <!-- Main content -->
         <div class="main-content flex-grow-1">
             <div class="half-background">
-                <div class="styled-box">
-                    <h1>Eventos</h1>
-                    
-                    <p> En esta sección puedes ver todos los eventos proximos a definir</p>
-                
-                    </div>
-                
-                    <table class="table table-striped table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Materia</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Segundo parcial</td>
-                                <td>20/07</td>
-                                <td>Examen presencial </td>
-                                <td>Analisis II</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Recuperatorio</td>
-                                <td>22/07</td>
-                                <td>Examen recuperatorio de segundo parcial</td>
-                                <td>Algoritmos</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Final</td>
-                                <td>24/07</td>
-                                <td>Examen final de la materia presencial</td>
-                                <td>Introduccion al software</td>
-                            </tr>
-                         
-                        </tbody>
-                    </table>
+                <div class="box">
+                    <h1>Mis Eventos</h1>
+                    <p>En esta sección puedes ver todos tus eventos.</p>
+                </div>
+                <br>
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Entrega</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in eventos %}
+                        <tr>
+                            <td>{{ evento.nombre }}</td>
+                            <td>{{ evento.fecha_limite }}</td>
+                            <td>{{ evento.descripcion }}</td>
+                            <td>{{ evento.materia.nombre }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="footer bg-dark text-light text-center py-3 mt-auto">
         <div class="container">
@@ -112,8 +96,7 @@
             </div>
         </div>
     </footer>
-
-    
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
