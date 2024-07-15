@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/mistareas.css">
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">
+                        <i class="bi bi-person-fill me-2"></i>Usuario
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-dark text-light">
+        <div class="logo p-3 text-center">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="img-fluid">
+        </div>
+        <nav class="nav flex-column p-3">
+            <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
+                <i class="bi bi-house-door-fill me-2"></i> Home
+            </a>
+            <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center active">
+                <i class="bi bi-book-fill me-2"></i> Materias
+            </a>
+            <a href="{{ url_for('eventos') }}" class="nav-link text-light d-flex align-items-center">
+                <i class="bi bi-calendar-event-fill me-2"></i> Eventos
+            </a>
+            <a href="{{ url_for('tareas') }}" class="nav-link text-light d-flex align-items-center">
+                <i class="bi bi-card-checklist me-2"></i> Tareas
+            </a>
+        </nav>
+    </div>
+        <!-- Main content -->
+        <div class="main-content flex-grow-1">
+            <div class="half-background">
+                <div class="box">
+                    <h1>Mis Tareas</h1>
+                    <p>En esta sección puedes ver todas tus tareas pendientes.</p>
+                </div>
+                <br><br>
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Entrega</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tarea in tareas %}
+                        <tr>
+                            <td>{{ tarea.nombre }}</td>
+                            <td>{{ tarea.fecha_limite }}</td>
+                            <td>{{ tarea.descripcion }}</td>
+                            <td>{{ tarea.materia.nombre if tarea.materia else 'Sin Materia' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light text-center py-3 mt-auto">
+        <div class="container">
+            <p>&copy; 2024 Pomodoro Team. Todos los derechos reservados.</p>
+            <div class="social-icons">
+                <a href="#" class="text-light mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-light mx-2"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

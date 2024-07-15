@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materias - Pomodoro Team</title>
+    <title>Eventos</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='gestion_materias.css') }}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/mistareas.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -51,47 +51,39 @@
                 </a>
             </nav>
         </div>
-        
+
         <!-- Main content -->
         <div class="main-content flex-grow-1">
             <div class="half-background">
-                <h1>Gestión de Materias</h1>
-                <form class="d-flex align-items-end mb-4" id="materiaForm" method="POST" action="{{ url_for('gestion_materias') }}">
-                    <div class="form-group me-3">
-                        <label for="nombre_materia" class="form-label">Nombre de la Materia</label>
-                        <input type="text" class="form-control" id="nombreMateria" name="nombre_materia" placeholder="Ej. Matemáticas" required>
-                    </div>
-                    <div class="form-group me-3">
-                        <label for="horario_materia" class="form-label">Horario</label>
-                        <input type="text" class="form-control" id="horarioMateria" name="horario_materia" placeholder="Ej. Lun - Mie 18:00 - 19:00hs" required>
-                    </div>
-                    <div class="form-group me-3">
-                        <label for="calificaciones_materia" class="form-label">Calificaciones</label>
-                        <input type="text" class="form-control" id="calificacionesMateria" name="calificaciones_materia" placeholder="Ej. Parcial: 6, Final: 8" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Añadir Materia</button>
-                </form>
-                <ul class="list-group materias-list w-100" id="materiasList">
-                    {% for materia in materias %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="mb-1">{{ materia.nombre }}</h5>
-                            <p class="mb-1"><strong>Horario:</strong> {{ materia.horario }}</p>
-                            <p class="mb-1">Calificaciones: {{ materia.calificaciones }}</p>
-                        </div>
-                        <div>
-                            <a href="{{ url_for('detalle_materia', materia_id=materia.id) }}" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-in-right"></i> Ir a Materia</a>
-                            <form action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" method="POST" action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" style="display:inline;">
-                                <button type="submit" class="btn btn-danger btn-sm eliminar-materia"><i class="bi bi-trash"></i>Eliminar</button>
-                            </form>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <div class="box">
+                    <h1>Mis Eventos</h1>
+                    <p>En esta sección puedes ver todos tus eventos.</p>
+                </div>
+                <br>
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Entrega</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evento in eventos %}
+                        <tr>
+                            <td>{{ evento.nombre }}</td>
+                            <td>{{ evento.fecha_limite }}</td>
+                            <td>{{ evento.descripcion }}</td>
+                            <td>{{ evento.materia.nombre }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="footer bg-dark text-light text-center py-3 mt-auto">
         <div class="container">
@@ -104,25 +96,7 @@
             </div>
         </div>
     </footer>
-
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const deleteTaskButtons = document.querySelectorAll('.btn-danger');
-            
-            deleteTaskButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    const form = button.closest('form');
-                    if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
-                        form.submit();
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
-
-

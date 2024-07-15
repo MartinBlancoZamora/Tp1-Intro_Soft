@@ -12,6 +12,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='materia.css') }}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('profile') }}">
+                            <i class="bi bi-person-fill me-2"></i>Usuario
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
     <div class="d-flex">
         <!-- Sidebar -->
         <div class="sidebar bg-dark text-light">
@@ -22,38 +39,108 @@
                 <a href="{{ url_for('home') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-house-door-fill me-2"></i> Home
                 </a>
-                <a href="{{ url_for('gestionmaterias') }}" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('gestion_materias') }}" class="nav-link text-light d-flex align-items-center active">
                     <i class="bi bi-book-fill me-2"></i> Materias
                 </a>
-                <a href="eventos.html" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('eventos') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-calendar-event-fill me-2"></i> Eventos
                 </a>
-                <a href="tareas.html" class="nav-link text-light d-flex align-items-center">
+                <a href="{{ url_for('tareas') }}" class="nav-link text-light d-flex align-items-center">
                     <i class="bi bi-card-checklist me-2"></i> Tareas
                 </a>
             </nav>
         </div>
-        
         <!-- Main content -->
         <div class="main-content flex-grow-1 d-flex flex-column align-items-center">
-            <div class="half-background">
+            <div class="half-background" style="max-width: 5000px;">
                 <div class="container">
                     <div class="header d-flex justify-content-between align-items-center">
-                        <h1>{{ materia['nombre'] }}</h1>
-                        <a href="{{ url_for('gestionmaterias') }}" class="btn btn-warning back-button"><i class="bi bi-arrow-left-circle"></i> Volver a Materias</a>
+                        <h1>{{ materia.nombre }}</h1>
+                        <a href="{{ url_for('gestion_materias') }}" class="btn btn-warning back-button"><i class="bi bi-arrow-left-circle"></i> Volver a Materias</a>
                     </div>
                     <div class="details d-flex justify-content-center align-items-center">
                         <div class="info me-3">
                             <h2>Horario:</h2>
-                            <p>{{ materia['horario'] }}</p>
+                            <p>{{ materia.horario }}</p>
                             <h2>Calificaciones:</h2>
-                            <p>{{ materia['calificaciones'] }}</p>
-                        </div>
+                            <p>{{ materia.calificaciones }}</p>
+                        </div>TypeError: unhashable type: 'list'
                         <div class="actions">
-                            <button class="btn btn-success btn-edit"><i class="bi bi-pencil"></i> Editar Materia</button>
-                            <button class="btn btn-danger btn-delete"><i class="bi bi-trash"></i> Eliminar Materia</button>
+                            <a href="{{ url_for('editar_materia', materia_id=materia.id) }}" class="btn btn-success btn-edit" action="{{ url_for('editar_materia', materia_id=materia.id)}}"><i class="bi bi-pencil"></i>Editar Materia</a>
+                            <form action="{{ url_for('eliminar_materia', materia_id=materia.id) }}" method="post" class="mt-3">
+                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar Materia</button>
+                            </form>
                         </div>
                     </div>
+                    <div class="tareas-section container mt-3" style="max-width: 4500px;">
+                        <h2>Tareas</h2>
+                        <form id="tareaForm" class="row g-3 mb-4" method="POST" action="{{ url_for('agregar_tarea' , materia_id=materia.id) }}">
+                            <div class="col-md-3">
+                                <label for="nombre_tarea" class="form-label">Nombre Tarea</label>
+                                <input type="text" class="form-control" id="tarea" name="nombre_tarea" placeholder="Nombra tu tarea aquí..." required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción de la tarea">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fecha_limite" class="form-label">Fecha Límite</label>
+                                <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" required>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-600"><i class="bi bi-plus-circle"></i> Añadir Tarea</button>
+                            </div>
+                        </form>
+                        <ul class="list-group tareas-list w-100" id="tareasList">
+                            {% for tarea in tareas %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ tarea.nombre_tarea }}</strong>
+                                    <p>{{ tarea.descripcion }}</p>
+                                    <small>Fecha Límite: {{ tarea.fecha_limite }}</small>
+                                </div>
+                                <form method="post" action="{{ url_for('eliminar_tarea', tarea_id=tarea.id) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="eventos-section container mt-3" style="max-width: 4500px;">
+                        <h2>Eventos</h2>
+                        <form id="eventoForm" class="row g-3 mb-4" method="POST" action="{{ url_for('agregar_evento', materia_id=materia.id) }}">
+                            <div class="col-md-3">
+                                <label for="nombre_evento" class="form-label">Nombre Evento</label>
+                                <input type="text" class="form-control" id="evento" name="nombre_evento" placeholder="Nombra tu evento aquí..." required>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción del evento">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="fecha_limite" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha_evento" name="fecha_limite" required>
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-600"><i class="bi bi-plus-circle"></i> Añadir Evento</button>
+                            </div>
+                        </form>
+                        <ul class="list-group eventos-list w-100" id="eventosList">
+                            {% for evento in eventos %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ evento.nombre_evento }}</strong>
+                                    <p>{{ evento.descripcion }}</p>
+                                    <small>Fecha: {{ evento.fecha_limite }}</small>
+                                </div>
+                                <form method="post" action="{{ url_for('eliminar_evento', evento_id=evento.id) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -74,6 +161,22 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const deleteTaskButtons = document.querySelectorAll('.btn-danger');
+            
+            deleteTaskButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const form = button.closest('form');
+                    if (confirm('¿Estás seguro de que deseas eliminar esta tarea?')) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 
